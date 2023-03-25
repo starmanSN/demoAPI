@@ -1,13 +1,15 @@
 package com.example.demoapi.dto.mapper;
 
-import com.example.demoapi.dto.UserDto;
+import com.example.demoapi.dto.AccountUserDto;
 import com.example.demoapi.entity.security.AccountUser;
 import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
 @Mapper
+@Component
 public interface UserMapper {
 
-    AccountUser toAccountUser(UserDto userDto);
+    AccountUser toAccountUser(AccountUserDto accountUserDto);
 
-    UserDto toUserDto(AccountUser accountUser);
+    AccountUserDto toUserDto(AccountUser accountUser);
 }

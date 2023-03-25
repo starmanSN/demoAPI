@@ -28,7 +28,7 @@ public class ReviewService {
     }
 
     public List<ReviewDto> findReviewsByProductId(Long id) {
-        ArrayList<Review> reviews =  reviewDao.findAllByProductId(id);
+        ArrayList<Review> reviews = reviewDao.findAllByProductId(id);
         return reviews.stream().map(reviewMapper::toReviewDto).collect(Collectors.toList());
     }
 

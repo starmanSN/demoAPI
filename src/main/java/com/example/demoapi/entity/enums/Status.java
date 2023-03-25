@@ -10,7 +10,7 @@ public enum Status {
         return this.title;
     }
 
-    private Status(final String title) {
+    Status(final String title) {
         this.title = title;
     }
 }

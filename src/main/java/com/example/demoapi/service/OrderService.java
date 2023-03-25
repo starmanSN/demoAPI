@@ -17,7 +17,7 @@ public class OrderService {
 
     private final OrderMapper orderMapper;
 
-    public static final String ORDER_ATTRIBUTE ="order";
+    public static final String ORDER_ATTRIBUTE = "order";
 
     public Order getCurrentOrder(HttpSession session) {
         Order order = (Order) session.getAttribute(ORDER_ATTRIBUTE);

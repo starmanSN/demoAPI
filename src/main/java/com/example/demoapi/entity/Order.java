@@ -17,20 +17,20 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "shop_order")
-public class Order{
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "recipient_name")
+    @Column(name = "recipient_username")
     private String recipientName;
 
     @Column(name = "recipient_mail")
     private String recipientMail;
 
-    @Enumerated(value = EnumType.ORDINAL)
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
     private OrderStatus status;
 

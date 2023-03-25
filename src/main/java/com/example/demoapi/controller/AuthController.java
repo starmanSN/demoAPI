@@ -1,6 +1,6 @@
 package com.example.demoapi.controller;
 
-import com.example.demoapi.dto.UserDto;
+import com.example.demoapi.dto.AccountUserDto;
 import com.example.demoapi.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,26 +28,26 @@ public class AuthController {
 
     @GetMapping("/registration")
     public String registrationPage(Model model) {
-        UserDto userDto = new UserDto();
-        model.addAttribute("userDto", userDto);
+        AccountUserDto accountUserDto = new AccountUserDto();
+        model.addAttribute("AccountUserDto", accountUserDto);
         return "auth/registration-form";
     }
 
     @PostMapping("/register")
-    public String handleRegistrationForm(@Valid UserDto userDto, BindingResult bindingResult, Model model) {
+    public String handleRegistrationForm(@Valid AccountUserDto accountUserDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "auth/registration-form";
         }
 
-        final String username = userDto.getUsername();
+        final String username = accountUserDto.getUsername();
         try {
             userService.findByUsername(username);
-            model.addAttribute("userDto", userDto);
+            model.addAttribute("AccountUserDto", accountUserDto);
             model.addAttribute("registrationError", "Username already exists");
             return "auth/registration-form";
         } catch (UsernameNotFoundException ignored) {
         }
-        userService.register(userDto);
+        userService.register(accountUserDto);
         model.addAttribute("username", username);
         return "auth/registration-confirmation";
     }

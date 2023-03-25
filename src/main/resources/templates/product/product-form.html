@@ -33,29 +33,29 @@
         </div>
         <div class="col-md-8">
             <select class="form-select" aria-label="Default select example" th:field="*{status}">
-                <option th:each="statusValue : ${T(ru.gb.gbapimay.common.enums.Status).values()}"
+                <option th:each="statusValue : ${T(com.example.demoapi.entity.enums.Status).values()}"
                         th:value="${statusValue.name()}"
                         th:text="${statusValue.title}"></option>
             </select>
         </div>
         <div class="col-md-8">
-            <label for="manufacturer-id">Производитель:</label>
-            <select class="form-select" id="manufacturer-id" th:field="*{manufacturer}">
-                <option th:each="current : ${manufacturers}"
+            <label for="organization-id">Производитель:</label>
+            <select class="form-select" id="organization-id" th:field="*{organization}">
+                <option th:each="current : ${organizations}"
                         th:value="${current.name}"
                         th:text="${current.name}"></option>
             </select>
 
         </div>
 
-        <div class="col-md-8">
-            <select class="form-select" th:field="*{categories}" multiple="multiple">
-                <option th:each="category : ${categoryService.findAll()}"
-                        th:value="${category.id}"
-                        th:text="${category.title}"></option>
-            </select>
+        <!--        <div class="col-md-8">-->
+        <!--            <select class="form-select" th:field="*{categories}" multiple="multiple">-->
+        <!--                <option th:each="category : ${categoryService.findAll()}"-->
+        <!--                        th:value="${category.id}"-->
+        <!--                        th:text="${category.title}"></option>-->
+        <!--            </select>-->
 
-        </div>
+        <!--        </div>-->
 
         <div class="col-md-8">
             <div class="input-group mb-3">

@@ -1,6 +1,6 @@
 package com.example.demoapi.service;
 
-import com.example.demoapi.dto.UserDto;
+import com.example.demoapi.dto.AccountUserDto;
 import com.example.demoapi.entity.security.AccountUser;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -8,11 +8,17 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
-    UserDto register(UserDto userDto);
-    UserDto update(UserDto userDto);
+    AccountUserDto register(AccountUserDto accountUserDto);
+
+    AccountUserDto update(AccountUserDto accountUserDto);
+
     AccountUser findByUsername(String username);
+
     AccountUser update(AccountUser userDto);
-    UserDto findById(Long id);
-    List<UserDto> findAll();
+
+    AccountUserDto findById(Long id);
+
+    List<AccountUserDto> findAll();
+
     void deleteById(Long id);
 }
