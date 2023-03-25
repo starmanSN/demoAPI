@@ -2,7 +2,7 @@ package com.example.demoapi.security;
 
 import com.example.demoapi.dao.AccountRoleDao;
 import com.example.demoapi.dao.AccountUserDao;
-import com.example.demoapi.dto.UserDto;
+import com.example.demoapi.dto.AccountUserDto;
 import com.example.demoapi.dto.mapper.UserMapper;
 import com.example.demoapi.entity.enums.AccountStatus;
 import com.example.demoapi.entity.security.AccountRole;
@@ -41,17 +41,17 @@ public class JpaUserDetailService implements UserDetailsService, UserService {
     }
 
     @Override
-    public UserDto register(UserDto userDto) {
-        if (accountUserDao.findByUsername(userDto.getUsername()).isPresent()) {
+    public AccountUserDto register(AccountUserDto accountUserDto) {
+        if (accountUserDao.findByUsername(accountUserDto.getUsername()).isPresent()) {
             throw new UsernameAlreadyExistsException(String.format(
-                    "User with username %s already exists", userDto.getUsername()));
+                    "User with username %s already exists", accountUserDto.getUsername()));
         }
-        AccountUser accountUser = userMapper.toAccountUser(userDto);
+        AccountUser accountUser = userMapper.toAccountUser(accountUserDto);
         AccountRole roleUser = accountRoleDao.findByName("ROLE_USER");
 
         accountUser.setRoles(Set.of(roleUser));
         accountUser.setStatus(AccountStatus.ACTIVE);
-        accountUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        accountUser.setPassword(passwordEncoder.encode(accountUserDto.getPassword()));
 
         AccountUser registeredAccountUser = accountUserDao.save(accountUser);
         log.debug("User with username {} was registered successfully", registeredAccountUser.getUsername());
@@ -60,10 +60,10 @@ public class JpaUserDetailService implements UserDetailsService, UserService {
 
     @Override
     @Transactional
-    public UserDto update(UserDto userDto) {
-        AccountUser user = userMapper.toAccountUser(userDto);
+    public AccountUserDto update(AccountUserDto accountUserDto) {
+        AccountUser user = userMapper.toAccountUser(accountUserDto);
         if (user.getId() != null) {
-            accountUserDao.findById(userDto.getId()).ifPresent(
+            accountUserDao.findById(accountUserDto.getId()).ifPresent(
                     (p) -> {
                         user.setVersion(p.getVersion());
                         user.setStatus(p.getStatus());
@@ -92,12 +92,12 @@ public class JpaUserDetailService implements UserDetailsService, UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public UserDto findById(Long id) {
+    public AccountUserDto findById(Long id) {
         return userMapper.toUserDto(accountUserDao.findById(id).orElse(null));
     }
 
     @Override
-    public List<UserDto> findAll() {
+    public List<AccountUserDto> findAll() {
         return accountUserDao.findAll().stream()
                 .map(userMapper::toUserDto)
                 .collect(Collectors.toList());

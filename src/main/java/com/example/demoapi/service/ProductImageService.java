@@ -59,7 +59,7 @@ public class ProductImageService {
                 throw new StorageException(String.format("File %s is empty", filename));
             }
             if (filename.contains("..")) {
-                throw new StorageException(String.format("Symbol '..' do not permit"));
+                throw new StorageException("Symbol '..' do not permit");
             }
             Files.createDirectories(rootLocation.resolve(path));
             try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(rootLocation.resolve(path))) {

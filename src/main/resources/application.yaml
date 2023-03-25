@@ -1,7 +1,11 @@
+storage:
+  location:
+    './storage'
+
 spring:
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create-drop
     show-sql: true
   datasource:
     url: jdbc:postgresql://localhost:5432/shop

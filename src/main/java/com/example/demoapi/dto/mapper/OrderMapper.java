@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface OrderMapper {
 
-    Order toOrder(OrderDto orderDto);
+//    Order toOrder(OrderDto orderDto);
 
-    OrderDto toOrderDto(Order order);
+//    OrderDto toOrderDto(Order order);
 }

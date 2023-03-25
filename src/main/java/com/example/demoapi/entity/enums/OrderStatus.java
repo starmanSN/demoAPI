@@ -9,7 +9,7 @@ public enum OrderStatus {
 
     private final String status;
 
-    private OrderStatus(final String status) {
+    OrderStatus(final String status) {
         this.status = status;
     }
 
