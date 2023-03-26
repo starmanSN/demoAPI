@@ -1,0 +1,10 @@
+security:
+  endpoint:
+    decrypt:
+      enabled: false
+
+encrypt:
+  key-store:
+    password: ${ENCRYPT_KEYSTORE_PASSWORD:123456}
+    alias: ${ENCRYPT_KEYSTORE_ALIAS:shopkey}
+    location: ${ENCRYPT_KEYSTORE_LOCATION:file:///C:/Java/demoAPI/config-server/server.jks}
