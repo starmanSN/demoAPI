@@ -1,0 +1,136 @@
+-- create table account_role
+-- (
+--     id   bigserial not null,
+--     name varchar(255),
+--     primary key (id)
+-- );
+-- create table authority
+-- (
+--     id         bigserial not null,
+--     permission varchar(255),
+--     primary key (id)
+-- );
+-- create table discount
+-- (
+--     id       bigserial not null,
+--     amount   integer,
+--     duration integer,
+--     primary key (id)
+-- );
+-- create table logo
+-- (
+--     id              bigserial not null,
+--     logo            varchar(255),
+--     organization_id bigint,
+--     primary key (id)
+-- );
+-- create table notifications
+-- (
+--     id    bigserial not null,
+--     date  date,
+--     text  varchar(255),
+--     title varchar(255),
+--     primary key (id)
+-- );
+-- create table order_item
+-- (
+--     id          bigserial not null,
+--     item_price  numeric(38, 2),
+--     quantity    smallint,
+--     total_price numeric(38, 2),
+--     order_id    bigint,
+--     product_id  bigint,
+--     primary key (id)
+-- );
+-- create table organization
+-- (
+--     id          bigserial not null,
+--     description varchar(255),
+--     logo        varchar(255),
+--     name        varchar(255),
+--     version     integer,
+--     primary key (id)
+-- );
+-- create table product
+-- (
+--     id                       bigserial not null,
+--     amount                   bigint,
+--     cost                     numeric(38, 2),
+--     description              varchar(255),
+--     keywords                 varchar(255),
+--     rating                   integer,
+--     reviews                  varchar(255),
+--     status                   varchar(255),
+--     table_of_characteristics varchar(255),
+--     title                    varchar(255),
+--     version                  integer,
+--     discount_id              bigint,
+--     organization_id          bigint,
+--     primary key (id)
+-- );
+-- create table product_image
+-- (
+--     id         bigserial not null,
+--     path       varchar(255),
+--     product_id bigint,
+--     primary key (id)
+-- );
+-- create table review
+-- (
+--     id         bigserial not null,
+--     approved   boolean,
+--     comment    varchar(255),
+--     user_id    bigint,
+--     product_id bigint,
+--     primary key (id)
+-- );
+-- create table role_authority
+-- (
+--     role_id      bigint not null,
+--     authority_id bigint not null,
+--     primary key (role_id, authority_id)
+-- );
+-- create table shop_order
+-- (
+--     id                 bigserial not null,
+--     price              numeric(38, 2),
+--     recipient_mail     varchar(255),
+--     recipient_username varchar(255),
+--     status             varchar(255),
+--     user_id            bigint,
+--     primary key (id)
+-- );
+-- create table user_role
+-- (
+--     user_id bigint not null,
+--     role_id bigint not null,
+--     primary key (user_id, role_id)
+-- );
+-- create table users
+-- (
+--     id                      bigserial not null,
+--     account_non_expired     boolean   not null,
+--     account_non_locked      boolean   not null,
+--     balance                 numeric(38, 2),
+--     credentials_non_expired boolean   not null,
+--     email                   varchar(255),
+--     enabled                 boolean   not null,
+--     password                varchar(255),
+--     status                  varchar(255),
+--     username                varchar(255),
+--     version                 integer,
+--     primary key (id)
+-- );
+-- alter table if exists logo add constraint FKbwvesfv5a3rco4igx4po9s21s foreign key (organization_id) references organization;
+-- alter table if exists order_item add constraint FK67irffekar4ku5ab7cx4wvrlv foreign key (order_id) references shop_order;
+-- alter table if exists order_item add constraint FK551losx9j75ss5d6bfsqvijna foreign key (product_id) references product;
+-- alter table if exists product add constraint FKps2e0q9jpd0i9kj83je4rsmf1 foreign key (discount_id) references discount;
+-- alter table if exists product add constraint FKd7o25pueh2dsexxvtu2hia4i3 foreign key (organization_id) references organization;
+-- alter table if exists product_image add constraint FK6oo0cvcdtb6qmwsga468uuukk foreign key (product_id) references product;
+-- alter table if exists review add constraint FK6cpw2nlklblpvc7hyt7ko6v3e foreign key (user_id) references users;
+-- alter table if exists review add constraint FKiyof1sindb9qiqr9o8npj8klt foreign key (product_id) references product;
+-- alter table if exists role_authority add constraint FKqbri833f7xop13bvdje3xxtnw foreign key (authority_id) references authority;
+-- alter table if exists role_authority add constraint FK4s0o4o81k0kn5i6jgxyxvmfp0 foreign key (role_id) references account_role;
+-- alter table if exists shop_order add constraint FKtce93cvn5jsb1kqfd4pikkdfo foreign key (user_id) references users;
+-- alter table if exists user_role add constraint FKo8dxq4xsrtpl37wsnpe3gn3x7 foreign key (role_id) references account_role;
+-- alter table if exists user_role add constraint FKj345gk1bovqvfame88rcx7yyx foreign key (user_id) references users;
